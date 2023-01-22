@@ -8,12 +8,6 @@ class Particle:
         self.coord = np.array([coord["x"], coord["y"], coord["z"]])
         self.velocity = np.array([velocity["x"],velocity["y"], velocity["z"]])
         self.color = color
-    
-    #def accelerate(self, force, dt):
-    #    # delta is the velocity the particle is accelerated by in the timestep dt
-    #    a = force / (self.mass / gravConst)
-    #    delta = a * dt
-    #    self.velocity = self.velocity + delta
 
     def move(self, dt):
         # delta is the distance the particle is moved by in the timestep dt

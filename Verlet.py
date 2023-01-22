@@ -1,3 +1,4 @@
+import progressBar 
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -5,6 +6,17 @@ offsetspeed = np.array([000, 000, 0])
 
 
 def verlet(particles, h, n):
+
+    """
+    Calculates the movement of particles with Verlet algorithm
+    Returns positions in multidimensional array [particle p][dimension 0-2][timestep i].
+    Returns maximum and minimum of the coordinates too
+    @params
+        particles   - Required  : array of Objects from Particle Class (Particle)
+        h           - Required  : size of timestep (float)
+        n           - Required  : number of timesteps (Str)
+    """
+
     mmin = np.amin(particles[0].coord)
     mmax = np.amax(particles[0].coord)
     t_axis = np.linspace(0, n*h, num=n)
@@ -40,8 +52,9 @@ def verlet(particles, h, n):
             p_axes[p][2][i] = pt.coord[2]
             mmin = min(mmin, np.amin(pt.coord))
             mmax = max(mmax, np.amax(pt.coord))
-        if i/n*100%10 == 0: 
-            print(i/n*100,"%")
+        if (i+1)/n*100%5 == 0: 
+            progressBar.draw(i, n, "Verlet", "Complete", length=50)
+
    
     fig , ax = plt.subplots()
     

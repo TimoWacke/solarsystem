@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import Verlet
 import Particles
+import progressBar
+
 
 interval = 0.25
 steps = 10000
@@ -12,13 +14,11 @@ p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps)
 
 particleMasses = [p.mass for p in particles]
 particleColors = [p.color for p in particles]
-maxsize = max(particleMasses) **(1/10)
-s = list(map(lambda x: x**(1/10) / maxsize, particleMasses))
-s *= 69
+maxsize = max(particleMasses) ** (1/8)
+s = list(map(lambda x: x**(1/8) / maxsize * 69, particleMasses))
 c = particleColors
 
-
-plt.rcParams['animation.ffmpeg_path'] = 'ffmpeg.exe'
+plt.rcParams['animation.ffmpeg_path'] = './ffmpeg.exe'
 
 
 class AnimatedScatter(object):
@@ -35,12 +35,19 @@ class AnimatedScatter(object):
         plt.xlim([mmin, mmax])
         plt.ylim([mmin, mmax])
         # Then setup FuncAnimation.
-        self.skip = int(steps / 500)
-        self.ani = animation.FuncAnimation(self.fig, self.update, interval=25, frames=500,
+        self.frames = 250
+        self.fps = 25
+        self.skip = int(steps / self.frames)
+        self.ani = animation.FuncAnimation(self.fig, self.update, interval=int(1000/self.fps), frames=self.frames,
                                            init_func=self.setup_plot, blit=True)
-        self.ani.save('scatter.mp4', writer='ffmpeg', fps=30,
+        plt.show()
+        plt.close()
+        print("\n")
+        print("Saving Video")
+        self.ani.save('scatter.mp4', writer='ffmpeg', fps=self.fps,
                       dpi=100, metadata={'title': 'test'})
-        plt.close()                   # avoid plotting a spare static plot
+
+        # avoid plotting a spare static plot
 
     def setup_plot(self):
         """Initial drawing of the scatter plot."""
@@ -49,28 +56,23 @@ class AnimatedScatter(object):
         for p in p_axes:
             xpositions.append(p[0][0])
             ypositions.append(p[1][0])
-        # Set x and y data...
         self.scat = self.ax.scatter(xpositions, ypositions, s=s, c=c)
-        # For FuncAnimation's sake, we need to return the artist we'll be using
-        # Note that it expects a sequence of artists, thus the trailing comma.
 
         return self.scat,
 
     def update(self, i):
         """Update the scatter plot."""
         xy = []
-        if (i*self.skip/steps*100) % 10 == 0:
-            print(i*self.skip/steps*100, "%", i)
+        progressBar.draw(
+            i+1, self.frames, prefix='Rendering', suffix='Complete', length=50)
         for p in p_axes:
             xy.append([p[0][i*self.skip], p[1][i*self.skip]])
         # Set x and y data...
         self.scat.set_offsets(xy)
-        # Set sizes...
-
-        # We need to return the updated artist for FuncAnimation to draw..
-        # Note that it expects a sequence of artists, thus the trailing comma.
+        if i >= self.frames - 1:
+            plt.close()
+            print("\nClose graphs to save video")
         return self.scat,
 
 
 a = AnimatedScatter()
-plt.show()
