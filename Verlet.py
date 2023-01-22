@@ -49,8 +49,8 @@ def verlet(particles, h, n):
         ax.plot(p_axes[p][0],  p_axes[p][1], c=pt.color, label=pt.name)
     mmin -= (mmax - mmin) / 25
     mmax += (mmax - mmin) / 25
-    fig.set_figwidth(20)
-    fig.set_figheight(20)
+    fig.set_figwidth(10)
+    fig.set_figheight(10)
     plt.xlim([mmin, mmax])
     plt.ylim([mmin, mmax])
     plt.legend()

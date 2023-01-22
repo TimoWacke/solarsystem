@@ -1,9 +1,10 @@
+import matplotlib.animation as animation
 import numpy as np
 import matplotlib.pyplot as plt
 import Verlet
 import Particles
 
-interval = 0.25;
+interval = 0.25
 steps = 10000
 particles = Particles.particleList()
 p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps)
@@ -17,16 +18,12 @@ for pt in particles:
     particleColors.append(pt.color)
     maxmass = max(maxmass, pt.mass)
 maxmass = maxmass**(1/10)
-s = map(lambda x: x**(1/10) / maxmass * 60, particleSizes)
+s = list(map(lambda x: x**(1/10) / maxmass * 60, particleSizes))
+print(s)
 c = particleColors
 
 
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import numpy as np
-import matplotlib.pyplot as plt
-from IPython import display
-plt.rcParams['animation.ffmpeg_path'] = './ffmpeg.exe'
+plt.rcParams['animation.ffmpeg_path'] = 'ffmpeg.exe'
 
 
 class AnimatedScatter(object):
@@ -38,8 +35,8 @@ class AnimatedScatter(object):
 
         # Setup the figure and axes...
         self.fig, self.ax = plt.subplots()
-        self.fig.set_figheight(15)
-        self.fig.set_figwidth(15)
+        self.fig.set_figheight(10)
+        self.fig.set_figwidth(10)
         plt.xlim([mmin, mmax])
         plt.ylim([mmin, mmax])
         # Then setup FuncAnimation.
@@ -48,9 +45,6 @@ class AnimatedScatter(object):
                                            init_func=self.setup_plot, blit=True)
         self.ani.save('scatter.mp4', writer='ffmpeg', fps=30,
                       dpi=100, metadata={'title': 'test'})
-        video = self.ani.to_html5_video()
-        html = display.HTML(video)
-        display.display(html)
         plt.close()                   # avoid plotting a spare static plot
 
     def setup_plot(self):
@@ -83,5 +77,5 @@ class AnimatedScatter(object):
         return self.scat,
 
 
-a=AnimatedScatter()
+a = AnimatedScatter()
 plt.show()
