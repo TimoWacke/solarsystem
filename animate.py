@@ -35,13 +35,12 @@ class AnimatedScatter(object):
         plt.xlim([mmin, mmax])
         plt.ylim([mmin, mmax])
         # Then setup FuncAnimation.
-        self.frames = 250
+        self.frames = 500
         self.fps = 25
         self.skip = int(steps / self.frames)
         self.ani = animation.FuncAnimation(self.fig, self.update, interval=int(1000/self.fps), frames=self.frames,
                                            init_func=self.setup_plot, blit=True)
         plt.show()
-        plt.close()
         print("\n")
         print("Saving Video")
         self.ani.save('scatter.mp4', writer='ffmpeg', fps=self.fps,
