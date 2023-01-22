@@ -54,13 +54,13 @@ def verlet(particles, h, n):
     plt.xlim([mmin, mmax])
     plt.ylim([mmin, mmax])
     plt.legend()
-    plt.show()
+    plt.draw()
 
     fig2 , ax2 = plt.subplots()
     ax2.plot(t_axis, energy, 'r-', label='energy')
     
     plt.legend()
-    plt.show()
+    plt.draw()
 
     return (p_axes, mmin, mmax)
 

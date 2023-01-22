@@ -10,16 +10,11 @@ particles = Particles.particleList()
 p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps)
 
 
-particleSizes = []
-particleColors = []
-maxmass = 0
-for pt in particles:
-    particleSizes.append(pt.mass)
-    particleColors.append(pt.color)
-    maxmass = max(maxmass, pt.mass)
-maxmass = maxmass**(1/10)
-s = list(map(lambda x: x**(1/10) / maxmass * 60, particleSizes))
-print(s)
+particleMasses = [p.mass for p in particles]
+particleColors = [p.color for p in particles]
+maxsize = max(particleMasses) **(1/10)
+s = list(map(lambda x: x**(1/10) / maxsize, particleMasses))
+s *= 69
 c = particleColors
 
 
