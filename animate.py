@@ -6,9 +6,10 @@ import Particles
 import progressBar
 
 
-interval = 0.25
-steps = 10000
-particles = Particles.particleList()
+interval = 1000000
+steps = 40
+#particles = Particles.particleList("solar")
+particles = Particles.particleList("2suns")
 p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps)
 
 
