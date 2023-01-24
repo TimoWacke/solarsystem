@@ -25,7 +25,7 @@ def verlet(particles, h, n):
     p_impulses = []
     p_radius = []
 
-    center =  np.array([0, 0, 0])
+    center =  np.array([float(0), float(0), float(0)])
     masssum = 0
     for p in particles:
         p_axes.append([np.zeros(n), np.zeros(n), np.zeros(n)])
@@ -33,8 +33,8 @@ def verlet(particles, h, n):
         center += p.coord * p.mass 
         p_impulses.append(np.zeros(n))
         p_radius.append(np.zeros(n))
-
-    center /= masssum
+    print(center, masssum)
+    center *= (1/masssum)
 
     for pti in particles:
         for ptj in particles: 
