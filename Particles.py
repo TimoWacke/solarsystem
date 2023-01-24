@@ -37,7 +37,7 @@ class Particle:
 
 def particleList(name):
 
-    if name == "solar":
+    if name == "Solar":
         star = Particle("Sun", sol.mass_sun, {"x": 0, "y": 0, "z": 0}, {
                         "x": 0, "y": 0, "z": 0}, "yellow")
         # star = Particle("sun", 1000, {"x": 0, "y": 0, "z": 0 },{"x": -0.001, "y": 0, "z": 0 } )
@@ -53,7 +53,7 @@ def particleList(name):
                         "x": sol.velocity_earth, "y": sol.velocity_moon, "z": 0}, "#666666")
         return [star, mercury, venus, earth, mars, moon]
 
-    if name == "2suns":
+    if name == "Tatoo":
         sun1 = Particle("Tatoo I", 50, {"x": 0, "y": 10, "z": 0}, {
                         "x": -1, "y": 0, "z": 0}, "peachpuff")
         sun2 = Particle(
@@ -64,7 +64,7 @@ def particleList(name):
         return [sun1, sun2]
         return [sun1, sun2, planet]
 
-    if name == "elipse":
+    if name == "Elipse":
         star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
                         "x": 0, "y": 0, "z": 0}, "organge")
         planet = Particle("Pluto", 1, {"x": 100, "y": 0, "z": 0}, {
@@ -73,7 +73,7 @@ def particleList(name):
         # return [sun1, sun2]
         return [star, planet]
 
-    if name == "moonsystem":
+    if name == "Moon System":
         star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
                         "x": 0, "y": 0, "z": 0}, "orange")
         planet = Particle("Planet", 10, {"x": 100, "y": 0, "z": 0}, {

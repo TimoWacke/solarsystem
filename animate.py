@@ -8,16 +8,18 @@ import sys
 
 interval = 5000
 steps = 10000
-particles = Particles.particleList("solar")
 interval = 0.15
 steps = int(1000 / interval)
-#particles = Particles.particleList("elipse")
-#particles = Particles.particleList("2suns")
-particles = Particles.particleList("moonsystem")
 
+name = "Solar"
+name = "Tatoo"
+name = "Elipse"
+name = "Moon System"
+
+particles = Particles.particleList(name)
 particles = Particles.removeTotalImpulse(particles)
 
-p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps)
+p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps, name)
 
 
 particleMasses = [p.mass for p in particles]
