@@ -6,17 +6,16 @@ import Particles
 import progressBar
 import sys
 
-interval = 5000
-steps = 10000
-interval = 0.15
-steps = int(1000 / interval)
+steps = 1000
+interval = float(1000/steps)
 
 name = "Solar"
 name = "Tatoo"
-name = "Elipse"
 name = "Moon System"
+name = "Elipse"
 
 particles = Particles.particleList(name)
+
 particles = Particles.removeTotalImpulse(particles)
 
 p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps, name)

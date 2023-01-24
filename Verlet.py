@@ -81,18 +81,19 @@ def verlet(particles, h, n, name):
     plt.xlim([mmin, mmax])
     plt.ylim([mmin, mmax])
     plt.legend()
-    plt.draw()
 
-    plt.title(f'{0} - {1} steps, dt={2}'.format(name, n, h))
-    plt.savefig(f'images/{0} - {1} steps, dt={2}.png'.format(name, n, h))
+    plt.title('{} - {} steps, dt={}'.format(name, n, h))
+    plt.savefig('images/{} - {} steps, dt={}.png'.format(name, n, h))
+    plt.close()
 
     fig2 , ax2 = plt.subplots()
     ax2.plot(t_axis, energy, 'r-', label='energy')
     plt.xlabel("time")
     plt.ylabel("total energy in system")
-    plt.title(f'{0} - {1} steps, dt={2}'.format(name, n, h))
-    plt.savefig(f'images/{0} - {1} steps, dt={2}_energy.png'.format(name, n, h))
-
+    plt.title('{} - {} steps, dt={}'.format(name, n, h))
+    plt.savefig('images/{} - {} steps, dt={}_energy.png'.format(name, n, h))
+    plt.close()
+    
     fig3, ax3 = plt.subplots()
 
     for p, pt in enumerate(particles):
@@ -100,11 +101,10 @@ def verlet(particles, h, n, name):
 
     plt.xlabel("radius")
     plt.ylabel("impulse")
-    plt.title(f'{0} - {1} steps, dt={2}'.format(name, n, h))
-    plt.savefig(f'images/{0} - {1} steps, dt={2}_phase.png'.format(name, n, h))
-
+    plt.title('{} - {} steps, dt={}'.format(name, n, h))
     plt.legend()
-    plt.draw()
+    plt.savefig('images/{} - {} steps, dt={}_phase.png'.format(name, n, h))
+    plt.close()
 
     return (p_axes, mmin, mmax)
 
