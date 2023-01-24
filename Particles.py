@@ -76,10 +76,10 @@ def particleList(name):
     if name == "moonsystem":
         star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
                         "x": 0, "y": 0, "z": 0}, "orange")
-        planet = Particle("Planet", 1, {"x": 100, "y": 0, "z": 0}, {
-                        "x": 0, "y": 2, "z": 0}, "cadetblue")
-        moon = Particle("Moon", 1, {"x": 100, "y": 2, "z": 0}, {
-                        "x": 0.5, "y": 2, "z": 0}, "black")
+        planet = Particle("Planet", 10, {"x": 100, "y": 0, "z": 0}, {
+                        "x": 0, "y": 3, "z": 0}, "cadetblue")
+        moon = Particle("Moon", 1, {"x": 100, "y": 4, "z": 0}, {
+                        "x": 1, "y": 3, "z": 0}, "black")
         return [star, planet, moon]
 
 
