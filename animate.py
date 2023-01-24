@@ -6,13 +6,14 @@ import Particles
 import progressBar
 import sys
 
-steps = 2000
+steps = 20000
 interval = float(1000/steps)
 
 name = "Solar"
 name = "Tatoo"
 name = "Moon System"
 name = "Elipse"
+name = "Lagrangepoints"
 
 particles = Particles.particleList(name)
 
