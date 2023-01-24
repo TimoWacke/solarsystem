@@ -55,7 +55,7 @@ def particleList(name):
                         "x": sol.velocity_saturn, "y": 0, "z": 0}, "goldenrod")
         uranus = Particle("Uranus", sol.mass_uranus, {"x": 0, "y": sol.distance_uranus, "z": 0}, {
                         "x": sol.velocity_uranus, "y": 0, "z": 0}, "lightseagreen")
-        neptun = Particle("Neptun", sol.mass_neptune, {"x": 0, "y": sol.distance_neptune, "z": 0}, {
+        neptun = Particle("Neptune", sol.mass_neptune, {"x": 0, "y": sol.distance_neptune, "z": 0}, {
                         "x": sol.velocity_neptune, "y": 0, "z": 0}, "cornflowerblue")
         moon = Particle("Moon", sol.mass_moon, {"x": sol.distance_moon, "y": sol.distance_earth, "z": 0}, {
                         "x": sol.velocity_earth, "y": sol.velocity_moon, "z": 0}, "#666666")
