@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 
-def verlet(particles, h, n):
+def verlet(particles, h, n, name):
 
     """
     Calculates the movement of particles with Verlet algorithm
@@ -70,8 +70,8 @@ def verlet(particles, h, n):
    
     fig , ax = plt.subplots()
 
-    
-    
+
+
     for p, pt in enumerate(particles):
         ax.plot(p_axes[p][0],  p_axes[p][1], c=pt.color, label=pt.name) 
     mmin -= (mmax - mmin) / 25
@@ -83,8 +83,15 @@ def verlet(particles, h, n):
     plt.legend()
     plt.draw()
 
+    plt.title(f'{0} - {1} steps, dt={2}'.format(name, n, h))
+    plt.savefig(f'images/{0} - {1} steps, dt={2}.png'.format(name, n, h))
+
     fig2 , ax2 = plt.subplots()
     ax2.plot(t_axis, energy, 'r-', label='energy')
+    plt.xlabel("time")
+    plt.ylabel("total energy in system")
+    plt.title(f'{0} - {1} steps, dt={2}'.format(name, n, h))
+    plt.savefig(f'images/{0} - {1} steps, dt={2}_energy.png'.format(name, n, h))
 
     fig3, ax3 = plt.subplots()
 
@@ -93,6 +100,8 @@ def verlet(particles, h, n):
 
     plt.xlabel("radius")
     plt.ylabel("impulse")
+    plt.title(f'{0} - {1} steps, dt={2}'.format(name, n, h))
+    plt.savefig(f'images/{0} - {1} steps, dt={2}_phase.png'.format(name, n, h))
 
     plt.legend()
     plt.draw()
