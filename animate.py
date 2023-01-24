@@ -4,12 +4,17 @@ import matplotlib.pyplot as plt
 import Verlet
 import Particles
 import progressBar
+import sys
+
+interval = 5000
+steps = 10000
+particles = Particles.particleList("solar")
+interval = 0.5
+steps = 2500
+particles = Particles.particleList("elipse")
+#particles = Particles.particleList("2suns")
 
 
-interval = 1000000
-steps = 40
-#particles = Particles.particleList("solar")
-particles = Particles.particleList("2suns")
 p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps)
 
 
@@ -42,10 +47,12 @@ class AnimatedScatter(object):
         self.ani = animation.FuncAnimation(self.fig, self.update, interval=int(1000/self.fps), frames=self.frames,
                                            init_func=self.setup_plot, blit=True)
         plt.show()
-        print("\n")
-        print("Saving Video")
-        self.ani.save('scatter.mp4', writer='ffmpeg', fps=self.fps,
-                      dpi=100, metadata={'title': 'test'})
+
+        if len(sys.argv) > 1 and sys.argv[1] == "-v":
+            print("\n")
+            print("Saving Video")
+            self.ani.save('scatter.mp4', writer='ffmpeg', fps=self.fps,
+                        dpi=100, metadata={'title': 'test'})
 
         # avoid plotting a spare static plot
 
@@ -70,8 +77,9 @@ class AnimatedScatter(object):
         # Set x and y data...
         self.scat.set_offsets(xy)
         if i >= self.frames - 1:
-            plt.close()
-            print("\nClose graphs to save video")
+            if len(sys.argv) > 1 and sys.argv[1] == "-v":
+                plt.close()
+                print("\nClose graphs to save video")
         return self.scat,
 
 

@@ -18,6 +18,9 @@ class Particle:
     def kineticEnergy(self):
         return self.mass / 2 * np.linalg.norm(self.velocity)**2
 
+    def impulse(self):
+        return self.mass * np.linalg.norm(self.velocity)
+
     def potEnergy(self, otherParticle):
         diff = np.subtract(self.coord, otherParticle.coord)
         radius = np.linalg.norm(diff)
@@ -51,12 +54,22 @@ def particleList(name):
         return [star, mercury, venus, earth, mars, moon]
 
     if name == "2suns":
-        sun1 = Particle("Sun1", 100, {"x": 0, "y": 10, "z": 0}, {
-                        "x": -1, "y": 0, "z": 0}, "peachpuff")
+        sun1 = Particle("Tatoo I", 50, {"x": 0, "y": 10, "z": 0}, {
+                        "x": -1, "y": -0.01, "z": 0}, "peachpuff")
         sun2 = Particle(
-            "Sun1", 100, {"x": 0, "y": -10, "z": 0}, {"x": 1, "y": 0, "z": 0}, "orange")
+            "Tatoo II", 50, {"x": 0, "y": -10, "z": 0}, {"x": 1, "y": -0.01, "z": 0}, "orange")
         planet = Particle("Planet", 1, {"x": 100, "y": 0, "z": 0}, {
                           "x": 0, "y": 1, "z": 0}, "cadetblue")
 
+        #return [sun1, sun2]
         return [sun1, sun2, planet]
+
+    if name == "elipse":
+        star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
+                        "x": 0, "y": -0.0013, "z": 0}, "peachpuff")
+        planet = Particle("Pluto", 1, {"x": 100, "y": 0, "z": 0}, {
+                        "x": 0, "y": 1.3, "z": 0}, "cadetblue")
+
+        #return [sun1, sun2]
+        return [star, planet]
 

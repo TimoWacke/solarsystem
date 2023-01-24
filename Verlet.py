@@ -2,7 +2,7 @@ import progressBar
 import numpy as np
 import matplotlib.pyplot as plt
 
-offsetspeed = np.array([000, 000, 0])
+
 
 
 def verlet(particles, h, n):
@@ -22,8 +22,19 @@ def verlet(particles, h, n):
     t_axis = np.linspace(0, n*h, num=n)
     energy = np.zeros(n)
     p_axes = []
+    p_impulses = []
+    p_radius = []
+
+    center =  np.array([0, 0, 0])
+    masssum = 0
     for p in particles:
         p_axes.append([np.zeros(n), np.zeros(n), np.zeros(n)])
+        masssum += p.mass
+        center += p.coord * p.mass 
+        p_impulses.append(np.zeros(n))
+        p_radius.append(np.zeros(n))
+
+    center /= masssum
 
     for pti in particles:
         for ptj in particles: 
@@ -47,6 +58,8 @@ def verlet(particles, h, n):
                 pti.accelerate(ptj, h)
         for p, pt in enumerate(particles):
             energy[i] += pt.kineticEnergy()
+            p_impulses[p][i] = pt.impulse()
+            p_radius[p][i] = np.linalg.norm(pt.coord)
             p_axes[p][0][i] = pt.coord[0]
             p_axes[p][1][i] = pt.coord[1]
             p_axes[p][2][i] = pt.coord[2]
@@ -57,9 +70,11 @@ def verlet(particles, h, n):
 
    
     fig , ax = plt.subplots()
+
+    
     
     for p, pt in enumerate(particles):
-        ax.plot(p_axes[p][0],  p_axes[p][1], c=pt.color, label=pt.name)
+        ax.plot(p_axes[p][0],  p_axes[p][1], c=pt.color, label=pt.name) 
     mmin -= (mmax - mmin) / 25
     mmax += (mmax - mmin) / 25
     fig.set_figwidth(10)
@@ -71,7 +86,15 @@ def verlet(particles, h, n):
 
     fig2 , ax2 = plt.subplots()
     ax2.plot(t_axis, energy, 'r-', label='energy')
-    
+
+    fig3, ax3 = plt.subplots()
+
+    for p, pt in enumerate(particles):
+        ax3.plot(p_radius[p], p_impulses[p], c=pt.color, label=pt.name)
+
+    plt.xlabel("radius")
+    plt.ylabel("impulse")
+
     plt.legend()
     plt.draw()
 
