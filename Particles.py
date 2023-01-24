@@ -81,5 +81,5 @@ def removeTotalImpulse(particleList):
         totalMass += p.mass
     totalVelocity = totalImpulse / totalMass
     for p in particleList:
-        p.velocity -= totalVelocity
+       p.velocity = np.subtract(p.velocity, totalVelocity)
     return particleList

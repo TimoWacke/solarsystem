@@ -33,7 +33,6 @@ def verlet(particles, h, n):
         center += p.coord * p.mass 
         p_impulses.append(np.zeros(n))
         p_radius.append(np.zeros(n))
-    print(center, masssum)
     center *= (1/masssum)
 
     for pti in particles:
