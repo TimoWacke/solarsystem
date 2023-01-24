@@ -55,9 +55,9 @@ def particleList(name):
 
     if name == "2suns":
         sun1 = Particle("Tatoo I", 50, {"x": 0, "y": 10, "z": 0}, {
-                        "x": -1, "y": -0.01, "z": 0}, "peachpuff")
+                        "x": -1, "y": 0, "z": 0}, "peachpuff")
         sun2 = Particle(
-            "Tatoo II", 50, {"x": 0, "y": -10, "z": 0}, {"x": 1, "y": -0.01, "z": 0}, "orange")
+            "Tatoo II", 50, {"x": 0, "y": -10, "z": 0}, {"x": 1, "y": 0, "z": 0}, "orange")
         planet = Particle("Planet", 1, {"x": 100, "y": 0, "z": 0}, {
                           "x": 0, "y": 1, "z": 0}, "cadetblue")
 
@@ -66,7 +66,7 @@ def particleList(name):
 
     if name == "elipse":
         star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
-                        "x": 0, "y": -0.0013, "z": 0}, "organge")
+                        "x": 0, "y": 0, "z": 0}, "organge")
         planet = Particle("Pluto", 1, {"x": 100, "y": 0, "z": 0}, {
                         "x": 0, "y": 1.3, "z": 0}, "cadetblue")
 
@@ -75,19 +75,19 @@ def particleList(name):
 
     if name == "moonsystem":
         star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
-                        "x": 0, "y": -0.0013, "z": 0}, "orange")
+                        "x": 0, "y": 0, "z": 0}, "orange")
         planet = Particle("Planet", 1, {"x": 100, "y": 0, "z": 0}, {
                         "x": 0, "y": 2, "z": 0}, "cadetblue")
-        moon = Particle("Moon", 1, {"x": 100, "y": 7, "z": 0}, {
+        moon = Particle("Moon", 1, {"x": 100, "y": 2, "z": 0}, {
                         "x": 0.5, "y": 2, "z": 0}, "black")
         return [star, planet, moon]
 
 
 def removeTotalImpulse(particleList):
-    totalImpulse = 0
+    totalImpulse = np.array([float(0), float(0), float(0)])
     totalMass = 0
     for p in particleList:
-        totalImpulse += p.impulse()
+        totalImpulse = np.add(totalImpulse, p.impulse())
         totalMass += p.mass
     totalVelocity = totalImpulse / totalMass
     for p in particleList:
