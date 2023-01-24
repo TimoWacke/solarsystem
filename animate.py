@@ -6,7 +6,7 @@ import Particles
 import progressBar
 import sys
 
-steps = 1000
+steps = 2000
 interval = float(1000/steps)
 
 name = "Solar"
