@@ -12,7 +12,7 @@ particles = Particles.particleList("solar")
 interval = 0.5
 steps = 2500
 particles = Particles.particleList("elipse")
-#particles = Particles.particleList("2suns")
+particles = Particles.particleList("2suns")
 
 
 p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps)
