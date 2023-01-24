@@ -9,10 +9,11 @@ import sys
 interval = 5000
 steps = 10000
 particles = Particles.particleList("solar")
-#interval = 0.5
-#steps = 2500
+interval = 0.05
+steps = 2500
 #particles = Particles.particleList("elipse")
 #particles = Particles.particleList("2suns")
+particles = Particles.particleList("moonsystem")
 
 particles = Particles.removeTotalImpulse(particles)
 

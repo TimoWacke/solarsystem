@@ -66,12 +66,22 @@ def particleList(name):
 
     if name == "elipse":
         star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
-                        "x": 0, "y": -0.0013, "z": 0}, "peachpuff")
+                        "x": 0, "y": -0.0013, "z": 0}, "organge")
         planet = Particle("Pluto", 1, {"x": 100, "y": 0, "z": 0}, {
                         "x": 0, "y": 1.3, "z": 0}, "cadetblue")
 
-        #return [sun1, sun2]
+        # return [sun1, sun2]
         return [star, planet]
+
+    if name == "moonsystem":
+        star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
+                        "x": 0, "y": -0.0013, "z": 0}, "orange")
+        planet = Particle("Planet", 1, {"x": 100, "y": 0, "z": 0}, {
+                        "x": 0, "y": 2, "z": 0}, "cadetblue")
+        moon = Particle("Moon", 1, {"x": 100, "y": 7, "z": 0}, {
+                        "x": 0.5, "y": 2, "z": 0}, "black")
+        return [star, planet, moon]
+
 
 def removeTotalImpulse(particleList):
     totalImpulse = 0
