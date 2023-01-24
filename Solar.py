@@ -5,7 +5,11 @@ mass_venus = 4.867 * (10**24)  * gravConst
 mass_earth = 5.972 * (10**24)  * gravConst
 mass_mars = 6.39 * (10**23)  * gravConst
 mass_moon = 7.342 * (10**22)  * gravConst
-distance_mercury = 63.867 * (10**9)
+
+
+mass_neptune = 1.024 * (10**26) * gravConst
+
+distance_mercury = 63.867 * (10**9) 
 distance_venus = 108.84 * (10**9)
 distance_earth = 152.1 * (10**9)
 distance_mars = 230.66 * (10**9)
