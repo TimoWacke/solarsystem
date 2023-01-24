@@ -41,9 +41,6 @@ def verlet(particles, h, n, name):
         for ptj in particles: 
             if ptj == pti:
                 break
-            #force = pti.gravityForce(ptj)
-            #ptj.accelerate(-force, h/2)
-            #pti.accelerate(force, h/2)
             pti.accelerate(ptj, h/2)
     for i in range(n):
         for pt in particles:
