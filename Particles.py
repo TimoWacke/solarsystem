@@ -73,3 +73,8 @@ def particleList(name):
         #return [sun1, sun2]
         return [star, planet]
 
+def removeTotalImpulse(particleList):
+    totalImpulse = 0
+    totalMass = 0
+    for p in particleList:
+        totalImpulse += p.mass*p.velocity
