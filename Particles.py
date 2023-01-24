@@ -22,7 +22,10 @@ class Particle:
         return self.mass * self.velocity
 
     def phi(self):
-        return np.arctan(self.coord[0] / self.coord[1])
+        radianHalf = np.cos(self.coord[0] / np.linalg.norm(np.array([self.coord[0], self.coord[1]])) )
+        if self.coord[1] < 0:
+            return 2 * np.pi - radianHalf
+        return radianHalf 
 
     def potEnergy(self, otherParticle):
         diff = np.subtract(self.coord, otherParticle.coord)
@@ -35,8 +38,6 @@ class Particle:
         self.velocity = self.velocity + diff * other.mass * dt / (radius**3)
         other.velocity = other.velocity - diff * self.mass * dt / (radius**3)
         # return force that applys on self
-        # return f_abs * (diff/radius)
-
 
 def particleList(name):
 

@@ -63,12 +63,12 @@ class AnimatedScatter(object):
 
     def setup_plot(self):
         """Initial drawing of the scatter plot."""
-        xpositions = []
-        ypositions = []
+        xs = []
+        ys = []
         for p in p_axes:
-            xpositions.append(p[0][0])
-            ypositions.append(p[1][0])
-        self.scat = self.ax.scatter(xpositions, ypositions, s=s, c=c)
+            xs.append(p[0][0])
+            ys.append(p[1][0])
+        self.scat = self.ax.scatter(xs, ys, s=s, c=c)
 
         return self.scat,
 
@@ -87,5 +87,6 @@ class AnimatedScatter(object):
                 print("\nClose graphs to save video")
         return self.scat,
 
+    
 
 a = AnimatedScatter()
