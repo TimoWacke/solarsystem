@@ -24,6 +24,7 @@ def verlet(particles, h, n, name):
     p_axes = []
     p_impulses = []
     p_radius = []
+    p_phi = []
 
     center =  np.array([float(0), float(0), float(0)])
     masssum = 0
@@ -32,6 +33,7 @@ def verlet(particles, h, n, name):
         masssum += p.mass
         center += p.coord * p.mass 
         p_impulses.append(np.zeros(n))
+        p_phi.append(np.zeros(n))
         p_radius.append(np.zeros(n))
     center *= (1/masssum)
 
@@ -59,6 +61,7 @@ def verlet(particles, h, n, name):
             energy[i] += pt.kineticEnergy()
             p_impulses[p][i] = np.linalg.norm(pt.impulse())
             p_radius[p][i] = np.linalg.norm(np.subtract(pt.coord, center) )
+            p_phi[p][i] = pt.phi()
             p_axes[p][0][i] = pt.coord[0]
             p_axes[p][1][i] = pt.coord[1]
             p_axes[p][2][i] = pt.coord[2]
@@ -94,17 +97,20 @@ def verlet(particles, h, n, name):
     plt.savefig('images/{} - {} steps, dt={}_energy.png'.format(name, n, h))
     plt.close()
     
-    fig3, ax3 = plt.subplots()
+    fig3 = plt.figure()
+    ax3 = fig3.add_subplot(projection='3d')
 
     for p, pt in enumerate(particles):
-        ax3.plot(p_radius[p], p_impulses[p], c=pt.color, label=pt.name)
+        ax3.scatter(p_radius[p], p_phi[p], p_impulses[p], c=pt.color, s=4, label=pt.name)
 
-    plt.xlabel("radius")
-    plt.ylabel("impulse")
+    ax3.set_xlabel("radius")
+    ax3.set_ylabel("impulse")
+    #ax3.set_zlabel("phi")
     plt.title('{} - {} steps, dt={}'.format(name, n, h))
     plt.legend()
+    plt.show()
     plt.savefig('images/{} - {} steps, dt={}_phase.png'.format(name, n, h))
-    plt.close()
+    #plt.close()
 
     return (p_axes, mmin, mmax)
 

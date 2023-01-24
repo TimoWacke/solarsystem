@@ -28,4 +28,4 @@ velocity_uranus = 6810
 velocity_neptune = 544
 velocity_moon = 1022
 
-year = 60 * 60 * 24* 365.2
+earth_year = 60 * 60 * 24* 365.2

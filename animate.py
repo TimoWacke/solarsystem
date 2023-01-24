@@ -4,15 +4,17 @@ import matplotlib.pyplot as plt
 import Verlet
 import Particles
 import progressBar
+import Solar as sol
 import sys
 
-steps = 100000
-interval = 1000*4*170#float(1000/steps)
+interval = 2
+steps = int(4000 / interval)
 
 name = "Solar"
 #name = "Tatoo"
 #name = "Moon System"
-#name = "Elipse"
+name = "Elipse"
+name = "Phase Room"
 #name = "Lagrangepoints"
 
 particles = Particles.particleList(name)

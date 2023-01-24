@@ -21,6 +21,9 @@ class Particle:
     def impulse(self):
         return self.mass * self.velocity
 
+    def phi(self):
+        return np.arctan(self.coord[0] / self.coord[1])
+
     def potEnergy(self, otherParticle):
         diff = np.subtract(self.coord, otherParticle.coord)
         radius = np.linalg.norm(diff)
@@ -95,8 +98,8 @@ def particleList(name):
                         "x": 0, "y": 0, "z": 0}, "yellow")
         planet = Particle("Planet", 20, {"x": 100, "y": 0, "z": 0}, {
                         "x": 0, "y": 3, "z": 0}, "green")
-        l1 = Particle("L1", 0.1, {"x": 100/(sqrt(50)+1)*sqrt(50), "y": 0, "z": 0}, {
-                        "x": 0, "y": 3/(sqrt(50)+1)*sqrt(50), "z": 0}, "black")
+        l1 = Particle("L1", 0.1, {"x": 100/(np.sqrt(50)+1)*np.sqrt(50), "y": 0, "z": 0}, {
+                        "x": 0, "y": 3/(np.sqrt(50)+1)*np.sqrt(50), "z": 0}, "black")
         l2 = Particle("L2", 0.1, {"x": 100, "y": 0, "z": 0}, {
                         "x": 0, "y": 3, "z": 0}, "black")
         l3 = Particle("L3", 0.1, {"x": 100, "y": 0, "z": 0}, {
@@ -106,6 +109,16 @@ def particleList(name):
         l5 = Particle("L5", 0.1, {"x": 100*np.cos(np.pi/3), "y":100*np.sin(np.pi/3) , "z": 0}, {
                         "x": -3*np.sin(np.pi/3), "y": 3*np.cos(np.pi/3), "z": 0}, "black")
         return [star, planet, l4, l5]
+
+    if name == "Phase Room":
+        parts = [Particle("Star", 100000, {"x": 0, "y": 0, "z": 0}, {
+                        "x": 0, "y": 0, "z": 0}, "yellow")]
+        
+        for i in range(10):
+            parts.append(Particle("Planet {}".format(i), 1, {"x": 0, "y":(i+1)*500, "z": 0}, {"x": 10-i, "y": 0, "z": 0}, '#' + str(i)*6))
+        return parts
+
+
 
 def removeTotalImpulse(particleList):
     totalImpulse = np.array([float(0), float(0), float(0)])
