@@ -49,8 +49,14 @@ def particleList(name):
                          "x": sol.velocity_earth, "y": 0, "z": 0}, "steelblue")
         mars = Particle("Mars", sol.mass_mars, {"x": 0, "y": sol.distance_mars, "z": 0}, {
                         "x": sol.velocity_mars, "y": 0, "z": 0}, "#EE1111")
-        #jupiter = Particle("Jupiter", sol.mass_mars, {"x": 0, "y": sol.distance_mars, "z": 0}, {
-         #               "x": sol.velocity_mars, "y": 0, "z": 0}, "#EE1111")
+        jupiter = Particle("Jupiter", sol.mass_jupiter, {"x": 0, "y": sol.distance_jupiter, "z": 0}, {
+                        "x": sol.velocity_jupiter, "y": 0, "z": 0}, "chocolate")
+        saturn = Particle("Saturn", sol.mass_saturn, {"x": 0, "y": sol.distance_saturn, "z": 0}, {
+                        "x": sol.velocity_saturn, "y": 0, "z": 0}, "goldenrod")
+        uranus = Particle("Uranus", sol.mass_uranus, {"x": 0, "y": sol.distance_uranus, "z": 0}, {
+                        "x": sol.velocity_uranus, "y": 0, "z": 0}, "lightseagreen")
+        neptun = Particle("Neptun", sol.mass_neptune, {"x": 0, "y": sol.distance_Neptun, "z": 0}, {
+                        "x": sol.velocity_neptun, "y": 0, "z": 0}, "cornflowerblue")
         moon = Particle("Moon", sol.mass_moon, {"x": sol.distance_moon, "y": sol.distance_earth, "z": 0}, {
                         "x": sol.velocity_earth, "y": sol.velocity_moon, "z": 0}, "#666666")
         return [star, mercury, venus, earth, mars, moon]
