@@ -19,7 +19,7 @@ class Particle:
         return self.mass / 2 * np.linalg.norm(self.velocity)**2
 
     def impulse(self):
-        return self.mass * np.linalg.norm(self.velocity)
+        return self.mass * self.velocity
 
     def potEnergy(self, otherParticle):
         diff = np.subtract(self.coord, otherParticle.coord)
@@ -61,7 +61,7 @@ def particleList(name):
         planet = Particle("Planet", 1, {"x": 100, "y": 0, "z": 0}, {
                           "x": 0, "y": 1, "z": 0}, "cadetblue")
 
-        #return [sun1, sun2]
+        return [sun1, sun2]
         return [sun1, sun2, planet]
 
     if name == "elipse":

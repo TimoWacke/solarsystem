@@ -58,7 +58,7 @@ def verlet(particles, h, n):
                 pti.accelerate(ptj, h)
         for p, pt in enumerate(particles):
             energy[i] += pt.kineticEnergy()
-            p_impulses[p][i] = pt.impulse()
+            p_impulses[p][i] = np.linalg.norm(pt.impulse())
             p_radius[p][i] = np.linalg.norm(np.subtract(pt.coord, center) )
             p_axes[p][0][i] = pt.coord[0]
             p_axes[p][1][i] = pt.coord[1]
