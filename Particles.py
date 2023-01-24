@@ -55,11 +55,11 @@ def particleList(name):
                         "x": sol.velocity_saturn, "y": 0, "z": 0}, "goldenrod")
         uranus = Particle("Uranus", sol.mass_uranus, {"x": 0, "y": sol.distance_uranus, "z": 0}, {
                         "x": sol.velocity_uranus, "y": 0, "z": 0}, "lightseagreen")
-        neptun = Particle("Neptune", sol.mass_neptune, {"x": 0, "y": sol.distance_neptune, "z": 0}, {
+        neptune = Particle("Neptune", sol.mass_neptune, {"x": 0, "y": sol.distance_neptune, "z": 0}, {
                         "x": sol.velocity_neptune, "y": 0, "z": 0}, "cornflowerblue")
         moon = Particle("Moon", sol.mass_moon, {"x": sol.distance_moon, "y": sol.distance_earth, "z": 0}, {
                         "x": sol.velocity_earth, "y": sol.velocity_moon, "z": 0}, "#666666")
-        return [star, mercury, venus, earth, mars, moon]
+        return [star, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, moon]
 
     if name == "Tatoo":
         sun1 = Particle("Tatoo I", 50, {"x": 0, "y": 10, "z": 0}, {
