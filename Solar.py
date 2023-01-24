@@ -8,7 +8,11 @@ mass_jupiter = 19000 * (10**23) * gravConst
 mass_saturn = 5690 * (10**23) * gravConst
 mass_uranus = 870
 mass_moon = 7.342 * (10**22)  * gravConst
-distance_mercury = 63.867 * (10**9)
+
+
+mass_neptune = 1.024 * (10**26) * gravConst
+
+distance_mercury = 63.867 * (10**9) 
 distance_venus = 108.84 * (10**9)
 distance_earth = 152.1 * (10**9)
 distance_mars = 230.66 * (10**9)
