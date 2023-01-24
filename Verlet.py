@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 
-def verlet(particles, h, n, name):
+def verlet(particles, h, n, name, is3d):
 
     """
     Calculates the movement of particles with Verlet algorithm
@@ -94,20 +94,32 @@ def verlet(particles, h, n, name):
     plt.savefig('images/{} - {} steps, dt={}_energy.png'.format(name, n, h))
     plt.close()
     
-    fig3 = plt.figure()
-    ax3 = fig3.add_subplot(projection='3d')
+    if(is3d):
+        fig3 = plt.figure()
+        ax3 = fig3.add_subplot(projection='3d')
 
-    for p, pt in enumerate(particles):
-        ax3.scatter(p_radius[p], p_phi[p], p_impulses[p], c=pt.color, s=4, label=pt.name)
+        for p, pt in enumerate(particles):
+            ax3.scatter(p_radius[p], p_phi[p], p_impulses[p], c=pt.color, s=4, label=pt.name)
 
-    ax3.set_xlabel("radius")
-    ax3.set_ylabel("impulse")
-    #ax3.set_zlabel("phi")
-    plt.title('{} - {} steps, dt={}'.format(name, n, h))
-    plt.legend()
-    plt.show()
-    plt.savefig('images/{} - {} steps, dt={}_phase.png'.format(name, n, h))
-    #plt.close()
+        ax3.set_xlabel("radius")
+        ax3.set_ylabel("impulse")
+        #ax3.set_zlabel("phi")
+        plt.title('{} - {} steps, dt={}'.format(name, n, h))
+        plt.legend()
+        plt.show()
+        plt.savefig('images/{} - {} steps, dt={}_phase.png'.format(name, n, h))
+        plt.close()
+    else:
+        fig3, ax3 = plt.subplots()
+        for p, pt in enumerate(particles):
+            ax3.plot(p_radius[p], p_impulses[p], c=pt.color, label=pt.name)
+
+        plt.xlabel("radius")
+        plt.ylabel("impulse")
+        plt.title('{} - {} steps, dt={}'.format(name, n, h))
+        plt.legend()
+        plt.savefig('images/{} - {} steps, dt={}_phase.png'.format(name, n, h))
+        plt.close()
 
     return (p_axes, mmin, mmax)
 
