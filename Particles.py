@@ -93,19 +93,19 @@ def particleList(name):
     if name == "Lagrangepoints":
         star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
                         "x": 0, "y": 0, "z": 0}, "yellow")
-        planet = Particle("Planet", 20, {"x": 100, "y": 0, "z": 0}, {
+        planet = Particle("Planet", 7, {"x": 100, "y": 0, "z": 0}, {
                         "x": 0, "y": 3, "z": 0}, "green")
-        l1 = Particle("L1", 0.1, {"x": 100/(sqrt(50)+1)*sqrt(50), "y": 0, "z": 0}, {
-                        "x": 0, "y": 3/(sqrt(50)+1)*sqrt(50), "z": 0}, "black")
-        l2 = Particle("L2", 0.1, {"x": 100, "y": 0, "z": 0}, {
-                        "x": 0, "y": 3, "z": 0}, "black")
-        l3 = Particle("L3", 0.1, {"x": 100, "y": 0, "z": 0}, {
-                        "x": 0, "y": 3, "z": 0}, "black")
-        l4 = Particle("L4", 0.1, {"x": 100*np.cos(np.pi/3), "y":-100*np.sin(np.pi/3) , "z": 0}, {
+        #l1 = Particle("L1", 0.01, {"x": 100/(sqrt(50)+1)*sqrt(50), "y": 0, "z": 0}, {
+        #                "x": 0, "y": 3/(sqrt(50)+1)*sqrt(50), "z": 0}, "black")
+        #l2 = Particle("L2", 0.01, {"x": 100, "y": 0, "z": 0}, {
+        #                "x": 0, "y": 3, "z": 0}, "black")
+        l3 = Particle("L3", 0.01, {"x": -100, "y": 0, "z": 0}, {
+                        "x": 0, "y": -3, "z": 0}, "black")
+        l4 = Particle("L4", 0.01, {"x": 100*np.cos(np.pi/3), "y":-100*np.sin(np.pi/3) , "z": 0}, {
                         "x": 3*np.sin(np.pi/3), "y": 3*np.cos(np.pi/3), "z": 0}, "black")
-        l5 = Particle("L5", 0.1, {"x": 100*np.cos(np.pi/3), "y":100*np.sin(np.pi/3) , "z": 0}, {
+        l5 = Particle("L5", 0.01, {"x": 100*np.cos(np.pi/3), "y":100*np.sin(np.pi/3) , "z": 0}, {
                         "x": -3*np.sin(np.pi/3), "y": 3*np.cos(np.pi/3), "z": 0}, "black")
-        return [star, planet, l4, l5]
+        return [star, planet, l3, l4, l5]
 
 def removeTotalImpulse(particleList):
     totalImpulse = np.array([float(0), float(0), float(0)])
