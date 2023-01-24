@@ -97,6 +97,7 @@ def particleList(name):
                         "x": 3*np.sin(np.PI/3), "y": 3*np.cos(np.PI/3), "z": 0}, "cadetblue")
         l5 = Particle("L5", 1, {"x": 100*np.cos(np.PI/3), "y":100*np.sin(np.PI/3) , "z": 0}, {
                         "x": -3*np.sin(np.PI/3), "y": 3*np.cos(np.PI/3), "z": 0}, "cadetblue")
+        return [l4, l5]
 
 def removeTotalImpulse(particleList):
     totalImpulse = np.array([float(0), float(0), float(0)])
