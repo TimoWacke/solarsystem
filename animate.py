@@ -75,7 +75,7 @@ class AnimatedScatter(object):
         """Update the scatter plot."""
         xy = []
         progressBar.draw(
-            i+1, self.frames, prefix='Rendering', suffix='Complete', length=50)
+            i, self.frames, prefix='Rendering', suffix='Complete', length=50)
         for p in p_axes:
             xy.append([p[0][i*self.skip], p[1][i*self.skip]])
         # Set x and y data...
