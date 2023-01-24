@@ -14,6 +14,7 @@ steps = 2500
 particles = Particles.particleList("elipse")
 particles = Particles.particleList("2suns")
 
+particles = Particles.removeTotalImpulse(particles)
 
 p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps)
 
