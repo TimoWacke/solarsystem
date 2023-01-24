@@ -49,6 +49,8 @@ def particleList(name):
                          "x": sol.velocity_earth, "y": 0, "z": 0}, "steelblue")
         mars = Particle("Mars", sol.mass_mars, {"x": 0, "y": sol.distance_mars, "z": 0}, {
                         "x": sol.velocity_mars, "y": 0, "z": 0}, "#EE1111")
+        #jupiter = Particle("Jupiter", sol.mass_mars, {"x": 0, "y": sol.distance_mars, "z": 0}, {
+         #               "x": sol.velocity_mars, "y": 0, "z": 0}, "#EE1111")
         moon = Particle("Moon", sol.mass_moon, {"x": sol.distance_moon, "y": sol.distance_earth, "z": 0}, {
                         "x": sol.velocity_earth, "y": sol.velocity_moon, "z": 0}, "#666666")
         return [star, mercury, venus, earth, mars, moon]
@@ -85,10 +87,10 @@ def particleList(name):
     if name == "Lagrangepoints":
         star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {
                         "x": 0, "y": 0, "z": 0}, "yellow")
-        planet = Particle("Planet", 30, {"x": 100, "y": 0, "z": 0}, {
+        planet = Particle("Planet", 20, {"x": 100, "y": 0, "z": 0}, {
                         "x": 0, "y": 3, "z": 0}, "green")
-        l1 = Particle("L1", 0.1, {"x": 100, "y": 0, "z": 0}, {
-                        "x": 0, "y": 3, "z": 0}, "black")
+        l1 = Particle("L1", 0.1, {"x": 100/(sqrt(50)+1)*sqrt(50), "y": 0, "z": 0}, {
+                        "x": 0, "y": 3/(sqrt(50)+1)*sqrt(50), "z": 0}, "black")
         l2 = Particle("L2", 0.1, {"x": 100, "y": 0, "z": 0}, {
                         "x": 0, "y": 3, "z": 0}, "black")
         l3 = Particle("L3", 0.1, {"x": 100, "y": 0, "z": 0}, {
