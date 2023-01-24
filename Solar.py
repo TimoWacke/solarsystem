@@ -16,7 +16,7 @@ distance_mars = 230.66 * (10**9)
 distance_jupiter = 778.3 * (10**9)
 distance_saturn = 1427 * (10**9)
 distance_uranus = 2870 * (10**9)
-distance_Neptun = 4496 * (10**9)
+distance_neptune = 4496 * (10**9)
 distance_moon = 384.4 * (10**6)
 velocity_mercury = 47870
 velocity_venus = 35020
@@ -25,7 +25,7 @@ velocity_mars = 24077
 velocity_jupiter = 13070
 velocity_saturn = 9650
 velocity_uranus = 6810
-velocity_neptun = 544
+velocity_neptune = 544
 velocity_moon = 1022
 
 year = 60 * 60 * 24* 365.2
