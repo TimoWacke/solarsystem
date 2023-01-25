@@ -1,63 +1,37 @@
-import matplotlib.animation as animation
 import numpy as np
+import matplotlib.animation as animation
 import matplotlib.pyplot as plt
-import Verlet
-import Particles
+import ParticleFactory
 import progressBar
-import sys
 
-steps = 20000
-interval = float(1000/steps)
-showPhaseRoomIn3d = True
+class Animate:
+    """Animated scatter plot and charts using matplotlib.animations.FuncAnimation.
 
-name = "Solar"
-name = "Tatoo"
-name = "Moon System"
-name = "Elipse"
-name = "Lagrangepoints"
+        @params
+            particleFactory  - Required  : array of Objects from Particle Class (Particle)
+            simulator        - Required  : method like Simulate.verlet(), that returns data arrays
+    """
 
-particles = Particles.particleList(name)
-
-particles = Particles.removeTotalImpulse(particles)
-
-p_axes, mmin, mmax = Verlet.verlet(particles, interval, steps, name, showPhaseRoomIn3d)
-
-
-particleMasses = [p.mass for p in particles]
-particleColors = [p.color for p in particles]
-maxsize = max(particleMasses) ** (1/8)
-s = list(map(lambda x: x**(1/8) / maxsize * 69, particleMasses))
-c = particleColors
-
-plt.rcParams['animation.ffmpeg_path'] = './ffmpeg.exe'
-
-
-class AnimatedScatter(object):
-    """An animated scatter plot using matplotlib.animations.FuncAnimation."""
-
-    def __init__(self, numpoints=steps):
-        self.numpoints = numpoints
-        self.particles = particles
-
+    def __init__(self, particleFactory: ParticleFactory.ParticleFactory, simulator):
+        self.particleFactory = particleFactory
+        self.p_axes, self.p_momentum, self.p_radius, self.p_phi, self.energy, self.t_axis, self.mmin, self.mmax = simulator(
+            particleFactory.particleList)
+        self.n = len(self.t_axis)
+        self.h = np.round(self.t_axis[1]-self.t_axis[0], 3)
+        self.mmin -= (self.mmax - self.mmin) * 0.05
+        self.mmax += (self.mmax - self.mmin) * 0.05
         # Setup the figure and axes...
         self.fig, self.ax = plt.subplots()
         self.fig.set_figheight(10)
         self.fig.set_figwidth(10)
-        plt.xlim([mmin, mmax])
-        plt.ylim([mmin, mmax])
+        plt.xlim([self.mmin, self.mmax])
+        plt.ylim([self.mmin, self.mmax])
         # Then setup FuncAnimation.
         self.frames = 500
         self.fps = 25
-        self.skip = int(steps / self.frames)
+        self.skip = int(self.n / self.frames)
         self.ani = animation.FuncAnimation(self.fig, self.update, interval=int(1000/self.fps), frames=self.frames,
                                            init_func=self.setup_plot, blit=True)
-        plt.show()
-
-        if len(sys.argv) > 1 and sys.argv[1] == "-v":
-            print("\n")
-            print("Saving Video")
-            self.ani.save('scatter.mp4', writer='ffmpeg', fps=self.fps,
-                        dpi=100, metadata={'title': 'test'})
 
         # avoid plotting a spare static plot
 
@@ -65,28 +39,95 @@ class AnimatedScatter(object):
         """Initial drawing of the scatter plot."""
         xs = []
         ys = []
-        for p in p_axes:
+        for p in self.p_axes:
             xs.append(p[0][0])
             ys.append(p[1][0])
-        self.scat = self.ax.scatter(xs, ys, s=s, c=c)
-
+        self.scat = self.ax.scatter(
+            xs, ys, s=self.particleFactory.sizes, c=self.particleFactory.colors)
         return self.scat,
 
     def update(self, i):
         """Update the scatter plot."""
         xy = []
         progressBar.draw(
-            i, self.frames, prefix='Rendering', suffix='Complete', length=50)
-        for p in p_axes:
+            i+1, self.frames, prefix='Rendering', suffix='Complete', length=50)
+        for p in self.p_axes:
             xy.append([p[0][i*self.skip], p[1][i*self.skip]])
         # Set x and y data...
         self.scat.set_offsets(xy)
-        if i >= self.frames - 1:
-            if len(sys.argv) > 1 and sys.argv[1] == "-v":
-                plt.close()
-                print("\nClose graphs to save video")
+
         return self.scat,
 
-    
+    def pathPlot(self):
 
-a = AnimatedScatter()
+        fig, ax = plt.subplots()
+
+        for p, pt in enumerate(self.particleFactory.particleList):
+            ax.plot(self.p_axes[p][0],  self.p_axes[p]
+                    [1], c=pt.color, linewidth=2, label=pt.name)
+        fig.set_figwidth(10)
+        fig.set_figheight(10)
+        plt.xlim([self.mmin, self.mmax])
+        plt.ylim([self.mmin, self.mmax])
+        plt.legend()
+
+        plt.title(
+            '{} - {} steps, dt={}'.format(self.particleFactory.name, self.n, self.h))
+        plt.show()
+        plt.savefig(
+            'images/{} - {} steps, dt={}.png'.format(self.particleFactory.name, self.n, self.h))
+        plt.close()
+
+    def energyPlot(self):
+        fig2, ax2 = plt.subplots()
+        ax2.plot(self.t_axis, self.energy, 'r-', label='energy')
+        plt.xlabel("time")
+        plt.ylabel("total energy in system")
+        plt.title(
+            '{} - {} steps, dt={}'.format(self.particleFactory.name, self.n, self.h))
+        plt.show()
+        plt.savefig(
+            'images/{} - {} steps, dt={}_energy.png'.format(self.particleFactory.name, self.n, self.h))
+        plt.close()
+
+    def save_video(self):
+        print("\n")
+        print("Saving Video")
+        self.ani.save('scatter.mp4', writer='ffmpeg', fps=self.fps,
+                      dpi=100, metadata={'title': 'test'})
+
+    def phaseSpace(self, is3d):
+        if (is3d):
+            fig3 = plt.figure()
+            ax3 = fig3.add_subplot(projection='3d')
+
+            for p, pt in enumerate(self.particleFactory.particleList):
+                ax3.scatter(self.p_radius[p], self.p_phi[p],
+                            self.p_momentum[p], c=pt.color, s=4, label=pt.name)
+
+            ax3.set_xlabel("radius")
+            ax3.set_ylabel("phi")
+            # ax3.set_zlabel("phi")
+            plt.title(
+                '{} - {} steps, dt={}'.format(self.particleFactory.name, self.n, self.h))
+            plt.legend()
+            plt.show()
+            plt.savefig(
+                'images/{} - {} steps, dt={}_phase.png'.format(self.particleFactory.name, self.n, self.h))
+            plt.close()
+        else:
+            fig3, ax3 = plt.subplots()
+            for p, pt in enumerate(self.particleFactory.particles):
+                ax3.plot(self.p_radius[p], self.p_momentum[p],
+                         c=pt.color, label=pt.name)
+
+            plt.xlabel("radius")
+            plt.ylabel("momentum")
+            plt.title(
+                '{} - {} steps, dt={}'.format(self.particleFactory.name, self.n, self.h))
+            plt.legend()
+            plt.savefig(
+                'images/{} - {} steps, dt={}_phase.png'.format(self.particleFactory.name, self.n, self.h))
+            plt.close()
+
+        return (self.p_axes, self.mmin, self.mmax)
