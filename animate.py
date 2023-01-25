@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
-import ParticleFactory
+from ParticleFactory import ParticleFactory
+from collections.abc import Callable
+from Particle import Particle
 import progressBar
 
 class Animate:
@@ -12,7 +14,7 @@ class Animate:
             simulator        - Required  : method like Simulate.verlet(), that returns data arrays
     """
 
-    def __init__(self, particleFactory: ParticleFactory.ParticleFactory, simulator):
+    def __init__(self, particleFactory: ParticleFactory, simulator: Callable[[list[Particle]], tuple]):
         self.particleFactory = particleFactory
         self.p_axes, self.p_momentum, self.p_radius, self.p_phi, self.energy, self.t_axis, self.mmin, self.mmax = simulator(
             particleFactory.particleList)
