@@ -1,9 +1,9 @@
 from ParticleFactory import ParticleFactory
 from Simulate import Simulate
-from Animate import Animate
+from animate import Animate
 
 
-p = ParticleFactory("Elipse")
+p = ParticleFactory("Solar")
 p.removeOffsetSpeed()
 s = Simulate(h=0.1, n=10000)
 a = Animate(p, s.verlet)

@@ -8,7 +8,7 @@ class ParticleFactory:
     Class to handle a set of particle and use it in a simulation
 
     @params
-        name        - Required  : name of the predefined particle set
+        name        - Required  : name of the predefined particle set \in {"Solar", "Tatoo", "Elipse", "Moon System", "Lagrange Points", "Phase Room"}
     """
 
     def __init__(self, name):
