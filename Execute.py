@@ -1,11 +1,11 @@
 from ParticleFactory import ParticleFactory
 from Simulate import Simulate
-from animate import Animate
+from Animate import Animate
 
 
 p = ParticleFactory("Solar")
 p.removeOffsetSpeed()
-s = Simulate(h=0.1, n=10000)
+s = Simulate(h=1500, n=100000)
 a = Animate(p, s.verlet)
 
 a.pathPlot()
