@@ -25,7 +25,7 @@ velocity_mars = 24077
 velocity_jupiter = 13070
 velocity_saturn = 9650
 velocity_uranus = 6810
-velocity_neptune = 544
+velocity_neptune = 5440
 velocity_moon = 1022
 
 earth_year = 60 * 60 * 24* 365.2
