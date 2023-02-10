@@ -25,8 +25,8 @@ class Animate:
         self.fig, self.ax = plt.subplots()
         self.fig.set_figheight(10)
         self.fig.set_figwidth(10)
-        plt.xlim([self.data.mmin, self.data.mmax])
-        plt.ylim([self.data.mmin, self.data.mmax])
+        plt.xlim([self.data.qxmin, self.data.qxmax])
+        plt.ylim([self.data.qymin, self.data.qymax])
         # Then setup FuncAnimation.
         self.frames = 500
         self.fps = 25
@@ -60,14 +60,15 @@ class Animate:
         return self.scat,
 
     def pathPlot(self):
+        fig1, ax1 = plt.subplots()
 
         for p, pt in enumerate(self.particleFactory.particleList):
-            self.ax.plot(self.data.p_axes[p][0],  self.data.p_axes[p]
+            ax1.plot(self.data.p_axes[p][0],  self.data.p_axes[p]
                     [1], c=pt.color, linewidth=2, label=pt.name)
-        self.fig.set_figwidth(10)
-        self.fig.set_figheight(10)
-        plt.xlim([self.data.mmin, self.data.mmax])
-        plt.ylim([self.data.mmin, self.data.mmax])
+        fig1.set_figwidth(10)
+        fig1.set_figheight(10)
+        plt.xlim([self.data.qxmin, self.data.qxmax])
+        plt.ylim([self.data.qymin, self.data.qymax])
         plt.legend()
 
         plt.title(
@@ -130,7 +131,7 @@ class Animate:
                 'images/{} - {} steps, dt={}_phase.png'.format(self.particleFactory.name, self.n, self.h))
             plt.close()
 
-        return (self.data.p_axes, self.data.mmin, self.data.mmax)
+        return (self.data.p_axes)
 
     def closePlot(self):
         plt.show()

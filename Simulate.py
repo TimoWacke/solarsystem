@@ -28,9 +28,6 @@ class Simulate:
         @params
             particles      - Required  : list of Particle Objects
         """
-
-        mmin = np.amin(particles[0].coord)
-        mmax = np.amax(particles[0].coord)
         t_axis = np.linspace(0, self.n*self.h, num=self.n)
         energy = np.zeros(self.n)
         p_axes = []
@@ -75,12 +72,10 @@ class Simulate:
                 p_axes[p][0][i] = pt.coord[0]
                 p_axes[p][1][i] = pt.coord[1]
                 p_axes[p][2][i] = pt.coord[2]
-                mmin = min(mmin, np.amin(pt.coord))
-                mmax = max(mmax, np.amax(pt.coord))
             if (i+1)/self.n*100%5 == 0: 
                 progressBar.draw(i, self.n, "Verlet", "Complete", length=50)
 
-        return Data(p_axes, p_momentum, p_radius, p_phi, energy, t_axis, mmin, mmax)
+        return Data(p_axes, p_momentum, p_radius, p_phi, energy, t_axis)
 
 
     # useful if you create a Pendulum class to experiment
@@ -93,8 +88,7 @@ class Simulate:
        
         """
 
-        mmin = pendulumList[0].phi
-        mmax = pendulumList[0].phi
+
         t_axis = np.linspace(0, self.n*self.dt, num=self.n) # a list for each timestep to fill in with it's timevalue
         energy = np.zeros(self.n)  # a list for each timestep to fill in with the total energy of the system 
         p_axes = [] # for every particle a list of dimensions. And for each dimension a list with all timesteps to fill in coordinates
@@ -127,10 +121,8 @@ class Simulate:
                 p_radius[p][i] = pl.length
                 p_phi[p][i] = pl.phi
                 p_axes[p][i] = pl.phi
-                mmin = min(mmin,pl.phi)
-                mmax = max(mmax, pl.phi)
 
             # update the progress bar after every 5% progress
             if (i+1)/self.n*100%5 == 0: 
                 progressBar.draw(i, self.n, "Pendulum", "Complete", length=50)
-        return Data(p_axes, p_momentum, p_radius, p_phi, energy, t_axis, mmin, mmax)
+        return Data(p_axes, p_momentum, p_radius, p_phi, energy, t_axis)
