@@ -79,7 +79,7 @@ class Particle:
         # return force that applys on self
 
     def __repr__(self): 
-        return '{} - mass: {}, pos: {}, vel: {}'.format(self.name, self.mass, str(self.coord), str(self.velocity))
+        return '{}\t- mass: {}, pos: {}, vel: {}'.format(self.name, self.mass, str(self.coord), str(self.velocity))
 
     def __str__(self): 
-        return '{} - mass: {}, pos: {}, vel: {}'.format(self.name, self.mass, str(self.coord), str(self.velocity))
+        return '{}\t- mass: {}, pos: {}, vel: {}'.format(self.name, self.mass, str(self.coord), str(self.velocity))

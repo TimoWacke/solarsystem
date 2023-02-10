@@ -1,5 +1,6 @@
 import numpy as np
 from Particle import Particle
+from DataResults import Data
 import progressBar
 
 
@@ -79,11 +80,11 @@ class Simulate:
             if (i+1)/self.n*100%5 == 0: 
                 progressBar.draw(i, self.n, "Verlet", "Complete", length=50)
 
-        return (p_axes, p_momentum, p_radius, p_phi, energy, t_axis, mmin, mmax)
+        return Data(p_axes, p_momentum, p_radius, p_phi, energy, t_axis, mmin, mmax)
 
 
     # useful if you create a Pendulum class to experiment
-    def verletPendulum(self, pendulumList: list) -> tuple[list, list, list, list, list, list, float, float]:
+    def verletPendulum(self, pendulumList: list) -> Data:
             
         """
         Calculates the movement of pendulums with Verlet algorithm
@@ -132,4 +133,4 @@ class Simulate:
             # update the progress bar after every 5% progress
             if (i+1)/self.n*100%5 == 0: 
                 progressBar.draw(i, self.n, "Pendulum", "Complete", length=50)
-        return (p_axes, p_momentum, p_radius, p_phi, energy, t_axis, mmin, mmax)
+        return Data(p_axes, p_momentum, p_radius, p_phi, energy, t_axis, mmin, mmax)
