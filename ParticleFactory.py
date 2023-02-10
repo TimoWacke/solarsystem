@@ -35,7 +35,6 @@ class ParticleFactory:
         if self.name == "Solar":
             star = Particle("Sun", sol.mass_sun, {"x": 0, "y": 0, "z": 0}, {
                             "x": 0, "y": 0, "z": 0}, "yellow")
-            # star = Particle("sun", 1000, {"x": 0, "y": 0, "z": 0 },{"x": -0.001, "y": 0, "z": 0 } )
             mercury = Particle("Mercury", sol.mass_mercury, {"x": 0, "y": sol.distance_mercury, "z": 0}, {
                 "x": sol.velocity_mercury, "y": 0, "z": 0}, "#DDCC44")
             venus = Particle("Venus", sol.mass_venus, {"x": 0, "y": sol.distance_venus, "z": 0}, {

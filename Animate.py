@@ -7,6 +7,7 @@ from Particle import Particle
 from DataResults import Data
 import progressBar
 
+
 class Animate:
     """Animated scatter plot and charts using matplotlib.animations.FuncAnimation.
 
@@ -30,10 +31,10 @@ class Animate:
         self.frames = 500
         self.fps = 25
         self.skip = int(self.n / self.frames)
+        
         self.ani = animation.FuncAnimation(self.fig, self.update, interval=int(1000/self.fps), frames=self.frames,
                                            init_func=self.setup_plot, blit=True)
 
-        # avoid plotting a spare static plot
 
     def setup_plot(self):
         """Initial drawing of the scatter plot."""
@@ -60,13 +61,11 @@ class Animate:
 
     def pathPlot(self):
 
-        fig, ax = plt.subplots()
-
         for p, pt in enumerate(self.particleFactory.particleList):
-            ax.plot(self.data.p_axes[p][0],  self.data.p_axes[p]
+            self.ax.plot(self.data.p_axes[p][0],  self.data.p_axes[p]
                     [1], c=pt.color, linewidth=2, label=pt.name)
-        fig.set_figwidth(10)
-        fig.set_figheight(10)
+        self.fig.set_figwidth(10)
+        self.fig.set_figheight(10)
         plt.xlim([self.data.mmin, self.data.mmax])
         plt.ylim([self.data.mmin, self.data.mmax])
         plt.legend()
@@ -76,6 +75,7 @@ class Animate:
         plt.show()
         plt.savefig(
             'images/{} - {} steps, dt={}.png'.format(self.particleFactory.name, self.n, self.h))
+
         plt.close()
 
     def energyPlot(self):
@@ -131,3 +131,7 @@ class Animate:
             plt.close()
 
         return (self.data.p_axes, self.data.mmin, self.data.mmax)
+
+    def closePlot(self):
+        plt.show()
+        plt.close()
