@@ -77,3 +77,9 @@ class Particle:
         self.velocity = self.velocity + diff * other.mass * dt / (radius**3)
         other.velocity = other.velocity - diff * self.mass * dt / (radius**3)
         # return force that applys on self
+
+    def __repr__(self): 
+        return '{} - mass: {}, pos: {}, vel: {}'.format(self.name, self.mass, str(self.coord), str(self.velocity))
+
+    def __str__(self): 
+        return '{} - mass: {}, pos: {}, vel: {}'.format(self.name, self.mass, str(self.coord), str(self.velocity))
