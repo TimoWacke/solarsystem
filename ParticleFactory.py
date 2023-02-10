@@ -126,7 +126,9 @@ class ParticleFactory:
             p.velocity = np.subtract(p.velocity, totalVelocity)
 
     def __repr__(self):
-        pretty = "Particle Factory - " + self.name
+        pretty = "--------------------------------------------------\n"
+        pretty += "Particle Factory - " + self.name + "\n"
         for p in self.particleList:
             pretty += "\t" + str(p) + "\n"
+        pretty += "--------------------------------------------------\n"
         return pretty
