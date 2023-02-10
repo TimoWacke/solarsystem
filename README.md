@@ -1,4 +1,4 @@
-This is our CiS-Project 
+### This is our CiS-Project ###
 
 - Define your objects in ParticleFactory.py
 - Pass a simulation class to create an Animation with Animate.py
