@@ -1,8 +1,8 @@
 import numpy as np
 from Particle import Particle
-from DataResults import Data
 import progressBar
 
+from DataResults import Data
 
 class Simulate:
     """
@@ -18,7 +18,7 @@ class Simulate:
         self.h = h
         self.n = n
 
-    def verlet(self, particles: list[Particle]) -> tuple[list, list, list, list, list, list, float, float]:
+    def verlet(self, particles: list[Particle]) -> Data:
         
         """
         Calculates the movement of particles with Verlet algorithm
