@@ -22,6 +22,8 @@ class Animate:
         self.n = len(self.data.t_axis)
         self.h = np.round(self.data.t_axis[1]-self.data.t_axis[0], 3)
         # Setup the figure and axes...
+        
+    def create_video(self):
         self.fig, self.ax = plt.subplots()
         self.fig.set_figheight(10)
         self.fig.set_figwidth(10)
@@ -34,7 +36,6 @@ class Animate:
         
         self.ani = animation.FuncAnimation(self.fig, self.update, interval=int(1000/self.fps), frames=self.frames,
                                            init_func=self.setup_plot, blit=True)
-
 
     def setup_plot(self):
         """Initial drawing of the scatter plot."""
