@@ -1,5 +1,5 @@
 *.exe
 *.mp4
-archive/*
+*.png
 notebook.ipynb
 abgabe.ipynb
