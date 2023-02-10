@@ -46,7 +46,7 @@ class ParticleFactory:
                 "x": sol.velocity_neptune, "y": 0, "z": 0}, "cornflowerblue")
             moon = Particle("Moon", sol.mass_moon, {"x": sol.distance_moon, "y": sol.distance_earth, "z": 0}, {
                             "x": sol.velocity_earth, "y": sol.velocity_moon, "z": 0}, "#666666")
-            self.particleList = [star, mercury, venus, earth, mars, jupiter, saturn, uranus, moon]
+            self.particleList = [star, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, moon]
 
         if self.name == "Tatoo":
             sun1 = Particle("Tatoo I", 50, {"x": 0, "y": 10, "z": 0}, {

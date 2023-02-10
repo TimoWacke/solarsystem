@@ -5,7 +5,7 @@ from Animate import Animate
 
 p = ParticleFactory("Solar")
 p.removeOffsetSpeed()
-s = Simulate(h=1500, n=100000)
+s = Simulate(h=5000, n=100000)
 a = Animate(p, s.verlet)
 
 a.pathPlot()
