@@ -7,7 +7,8 @@
 - in the Simulate class you find a verlet algorithm implemented
 
 ### Quickstart ###
-Use the prepared Execute.py file
+Use the prepared Execute.py file to create first animations,
+or go step by step through the Guide.ipynb Notebook
 
 
 

@@ -11,17 +11,25 @@ class ParticleFactory:
         name        - Required  : name of the predefined particle set \in {"Solar", "Tatoo", "Elipse", "Moon System", "Lagrangepoints", "Phase Room"}
     """
 
-    def __init__(self, name):
+    def __init__(self, name: str):
         self.name = name
         self.particleList = []
         self.setParticles()
-        self.colors = [p.color for p in self.particleList]
-        self.masses = [p.mass for p in self.particleList]
-        maxsize = max(self.masses) ** (1/8)
-        self.sizes = list(map(lambda x: x**(1/8) / maxsize * 69, self.masses))
+        self.setSizeAndColor()
 
-    def importParticles(self, particles):
+    def setSizeAndColor(self):
+        try:
+            self.colors = [p.color for p in self.particleList]
+            self.masses = [p.mass for p in self.particleList]
+            maxsize = max(self.masses) ** (1/8)
+            self.sizes = list(map(lambda x: x**(1/8) / maxsize * 69, self.masses))
+        except:
+            self.sizes = [1] * len(self.particleList)
+            self.colors = ["black"] * len(self.particleList)
+
+    def importParticles(self, particles: list[Particle]):
         self.particleList = particles
+        self.setSizeAndColor()
 
     def setParticles(self):
         if self.name == "Solar":
