@@ -17,7 +17,7 @@ class Simulate:
         self.h = h
         self.n = n
 
-    def verlet(self, particles: list[Particle]):
+    def verlet(self, particles: list[Particle]) -> tuple[list, list, list, list, list, list, float, float]:
         
         """
         Calculates the movement of particles with Verlet algorithm
@@ -79,4 +79,57 @@ class Simulate:
             if (i+1)/self.n*100%5 == 0: 
                 progressBar.draw(i, self.n, "Verlet", "Complete", length=50)
 
+        return (p_axes, p_momentum, p_radius, p_phi, energy, t_axis, mmin, mmax)
+
+
+    # useful if you create a Pendulum class to experiment
+    def verletPendulum(self, pendulumList: list) -> tuple[list, list, list, list, list, list, float, float]:
+            
+        """
+        Calculates the movement of pendulums with Verlet algorithm
+        Returns positions in multidimensional array [particle p][dimension 0-2][timestep i].
+        Returns maximum and minimum of the coordinates too
+       
+        """
+
+        mmin = pendulumList[0].phi
+        mmax = pendulumList[0].phi
+        t_axis = np.linspace(0, self.n*self.dt, num=self.n) # a list for each timestep to fill in with it's timevalue
+        energy = np.zeros(self.n)  # a list for each timestep to fill in with the total energy of the system 
+        p_axes = [] # for every particle a list of dimensions. And for each dimension a list with all timesteps to fill in coordinates
+        p_momentum = [] # for every particle a list with all timesteps to fill in with the absolute values of momentum
+        p_radius = []  # for every particle a list with all timesteps to fill in with the readius to the center
+        p_phi = []  # for every particle a list with all timesteps to fill in with the angles relative to the coordinate system
+
+      
+        for p in pendulumList:
+            p_axes.append(np.zeros(self.n)) 
+            p_momentum.append(np.zeros(self.n))
+            p_phi.append(np.zeros(self.n))
+            p_radius.append(np.zeros(self.n))
+
+        for p in pendulumList:
+            p.accelerate(self.dt/2)
+
+        # Iterate for each timestep    
+        for i in range(self.n):
+
+            for p in pendulumList:
+                p.move(self.dt)            
+                p.accelerate(self.dt/2)
+            
+
+            # put the new data on the record
+            for p, pl in enumerate(pendulumList):
+                energy[i] += pl.energy()
+                p_momentum[p][i] = pl.v
+                p_radius[p][i] = pl.length
+                p_phi[p][i] = pl.phi
+                p_axes[p][i] = pl.phi
+                mmin = min(mmin,pl.phi)
+                mmax = max(mmax, pl.phi)
+
+            # update the progress bar after every 5% progress
+            if (i+1)/self.n*100%5 == 0: 
+                progressBar.draw(i, self.n, "Pendulum", "Complete", length=50)
         return (p_axes, p_momentum, p_radius, p_phi, energy, t_axis, mmin, mmax)

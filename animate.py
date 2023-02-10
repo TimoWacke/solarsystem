@@ -98,7 +98,7 @@ class Animate:
         self.ani.save('scatter.mp4', writer='ffmpeg', fps=self.fps,
                       dpi=100, metadata={'title': 'test'})
 
-    def phaseSpace(self, is3d):
+    def phaseSpace(self, is3d: bool):
         if (is3d):
             fig3 = plt.figure()
             ax3 = fig3.add_subplot(projection='3d')

@@ -13,14 +13,14 @@ class Particle:
         color       - Required  : HEX code, or Color name
     """
 
-    def __init__(self, name, mass, coord, velocity, color):
+    def __init__(self, name: str, mass: float, coord: dict, velocity: dict, color: str):
         self.name = name
         self.mass = mass
         self.coord = np.array([coord["x"], coord["y"], coord["z"]])
         self.velocity = np.array([velocity["x"], velocity["y"], velocity["z"]])
         self.color = color
 
-    def move(self, dt):
+    def move(self, dt: float):
 
         """
         Applies a movement with the particles currently set velocity
@@ -33,19 +33,19 @@ class Particle:
         delta = self.velocity * dt
         self.coord = self.coord + delta
 
-    def kineticEnergy(self):
+    def kineticEnergy(self) -> float:
         """
         returns the particles current kinetic energy
         """ 
         return self.mass / 2 * np.linalg.norm(self.velocity)**2
 
-    def momentum(self):
+    def momentum(self) -> np.array:
         """
         returns the particles current momentum vector
         """
         return self.mass * self.velocity
 
-    def phi(self):
+    def phi(self) -> float:
         """
         returns the particles current angle in radian relative to the coordinate system
         """
@@ -54,7 +54,7 @@ class Particle:
             return 2 * np.pi - radianHalf
         return radianHalf 
 
-    def potEnergy(self, otherParticle):
+    def potEnergy(self, otherParticle: 'Particle') -> float:
         """
         returns the particles current potential energy in the gravity field of the other particle
 
@@ -65,7 +65,7 @@ class Particle:
         radius = np.linalg.norm(diff)
         return - self.mass * otherParticle.mass / radius
 
-    def accelerate(self, other, dt):
+    def accelerate(self, other: 'Particle', dt: float):
         """
         adjusts the velocity of two particles, based on the gravity force they apply to each other.
 
