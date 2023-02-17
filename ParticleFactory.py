@@ -56,15 +56,14 @@ class ParticleFactory:
             self.particleList = [star, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, moon]
 
         if self.name == "Tatoo":
-            sun1 = Particle("Tatoo I", 50, {"x": 0, "y": 10, "z": 0}, {
+            sun1 = Particle("Tatoo I", 100, {"x": 0, "y": 15, "z": 0}, {
                             "x": -1, "y": 0, "z": 0}, "peachpuff")
             sun2 = Particle(
-                "Tatoo II", 50, {"x": 0, "y": -10, "z": 0}, {"x": 1, "y": 0, "z": 0}, "orange")
-            planet = Particle("Planet", 1, {"x": 100, "y": 0, "z": 0}, {
-                "x": 0, "y": 1, "z": 0}, "cadetblue")
+                "Tatoo II", 100, {"x": 0, "y": -15, "z": 0}, {"x": 1, "y": 0, "z": 0}, "orange")
+            planet = Particle("Planet", 1, {"x": 0, "y": 0, "z": 0}, {
+                "x": 3, "y": 0.5, "z": 0}, "cadetblue")
 
-            self.particleList = [sun1, sun2]
-            #self.particleList =[sun1, sun2, planet]
+            self.particleList =[sun1, sun2, planet]
 
         if self.name == "Elipse":
             star = Particle("Star", 1000, {"x": 0, "y": 0, "z": 0}, {

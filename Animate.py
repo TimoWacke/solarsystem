@@ -34,7 +34,7 @@ class Animate:
         self.fps = 25
         self.skip = int(self.n / self.frames)
         
-        self.ani = animation.FuncAnimation(self.fig, self.update, interval=int(1000/self.fps), frames=self.frames,
+        self.ani = animation.FuncAnimation(self.fig, self.update, interval=int(self.frames/self.fps), frames=self.frames,
                                            init_func=self.setup_plot, blit=True)
 
     def setup_plot(self):
