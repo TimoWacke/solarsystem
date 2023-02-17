@@ -98,40 +98,25 @@ class Animate:
         self.ani.save(self.particleFactory.name + '.mp4', writer='ffmpeg', fps=self.fps,
                       dpi=100, metadata={'title': 'test'})
 
-    def phaseSpace(self, is3d: bool):
-        if (is3d):
-            fig3 = plt.figure()
-            ax3 = fig3.add_subplot(projection='3d')
+    def phaseSpace(self):
+        fig3 = plt.figure()
+        ax3 = fig3.add_subplot(projection='3d')
 
-            for p, pt in enumerate(self.particleFactory.particleList):
-                ax3.scatter(self.data.p_radius[p], self.data.p_phi[p],
-                            self.data.p_momentum[p], c=pt.color, s=4, label=pt.name)
+        for p, pt in enumerate(self.particleFactory.particleList):
+            ax3.scatter(self.data.p_radius[p], self.data.p_phi[p],
+                        self.data.p_momentum[p], c=pt.color, s=4, label=pt.name)
 
-            ax3.set_xlabel("radius")
-            ax3.set_ylabel("phi")
-            # ax3.set_zlabel("phi")
-            plt.title(
-                '{} - {} steps, dt={}'.format(self.particleFactory.name, self.n, self.h))
-            plt.legend()
-            plt.show()
-            plt.savefig(
-                'images/{} - {} steps, dt={}_phase.png'.format(self.particleFactory.name, self.n, self.h))
-            plt.close()
-        else:
-            fig3, ax3 = plt.subplots()
-            for p, pt in enumerate(self.particleFactory.particles):
-                ax3.plot(self.data.p_radius[p], self.data.p_momentum[p],
-                         c=pt.color, label=pt.name)
-
-            plt.xlabel("radius")
-            plt.ylabel("momentum")
-            plt.title(
-                '{} - {} steps, dt={}'.format(self.particleFactory.name, self.n, self.h))
-            plt.legend()
-            plt.savefig(
-                'images/{} - {} steps, dt={}_phase.png'.format(self.particleFactory.name, self.n, self.h))
-            plt.close()
-
+        ax3.set_xlabel("radius")
+        ax3.set_ylabel("phi")
+        # ax3.set_zlabel("phi")
+        plt.title(
+            '{} - {} steps, dt={}'.format(self.particleFactory.name, self.n, self.h))
+        plt.legend()
+        plt.show()
+        plt.savefig(
+            'images/{} - {} steps, dt={}_phase.png'.format(self.particleFactory.name, self.n, self.h))
+        plt.close()
+        
         return (self.data.p_axes)
 
     def closePlot(self):
