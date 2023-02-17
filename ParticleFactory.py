@@ -8,7 +8,7 @@ class ParticleFactory:
     Class to handle a set of particle and use it in a simulation
 
     @params
-        name        - Required  : name of the predefined particle set \in {"Solar", "Tatoo", "Elipse", "Moon System", "Lagrangepoints", "Phase Room"}
+        name        - Required  : name of the predefined particle set in: \n{"Solar", "Tatooine", "Tatoo", "Elipse", "Moon System", "Lagrangepoints", "Phase Room"}
     """
 
     def __init__(self, name: str):
@@ -54,6 +54,16 @@ class ParticleFactory:
             moon = Particle("Moon", sol.mass_moon, {"x": sol.distance_moon, "y": sol.distance_earth, "z": 0}, {
                             "x": sol.velocity_earth, "y": sol.velocity_moon, "z": 0}, "#666666")
             self.particleList = [star, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, moon]
+
+        if self.name == "Tatooine":
+            sun1 = Particle("Tatoo I", 50, {"x": 0, "y": 10, "z": 0}, {
+                            "x": -1, "y": 0, "z": 0}, "peachpuff")
+            sun2 = Particle(
+                "Tatoo II", 50, {"x": 0, "y": -10, "z": 0}, {"x": 1, "y": 0, "z": 0}, "orange")
+            planet = Particle("Planet", 1, {"x": 100, "y": 0, "z": 0}, {
+                "x": 0, "y": 1, "z": 0}, "cadetblue")
+
+            self.particleList =[sun1, sun2, planet]
 
         if self.name == "Tatoo":
             sun1 = Particle("Tatoo I", 100, {"x": 0, "y": 15, "z": 0}, {

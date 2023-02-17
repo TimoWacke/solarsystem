@@ -95,7 +95,7 @@ class Animate:
     def save_video(self):
         print("\n")
         print("Saving Video")
-        self.ani.save('scatter.mp4', writer='ffmpeg', fps=self.fps,
+        self.ani.save(self.particleFactory.name + '.mp4', writer='ffmpeg', fps=self.fps,
                       dpi=100, metadata={'title': 'test'})
 
     def phaseSpace(self, is3d: bool):
